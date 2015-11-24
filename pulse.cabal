@@ -32,7 +32,7 @@ Library
     Hs-source-dirs:
         src
     Pkgconfig-depends:
-        libpulse >= 5.0 && < 6.0
+        libpulse >= 5.0
     Exposed-modules:
         Sound.Pulse
         Sound.Pulse.Monad
@@ -61,13 +61,13 @@ Library
         Sound.Pulse.Monad.Internal.IntrospectTH
     Build-depends:
         base                       >= 4   && < 5,
-        exceptions                 >= 0.6 && < 0.8,
+        exceptions                 >= 0.6,
         transformers               >= 0.4 && < 0.6,
         stm                        >= 2.4 && < 2.6,
         template-haskell           >= 2.7 && < 3,
         dependent-map              >= 0.1 && < 0.3,
         dependent-sum              >= 0.2 && < 0.4,
-        utf8-string                >= 0.3 && < 0.5,
+        utf8-string                >= 0.3,
         bytestring                 >= 0.9 && < 0.11
     Build-tools:
         c2hs, hsc2hs
