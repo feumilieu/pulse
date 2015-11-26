@@ -316,7 +316,7 @@ genPropTag =
     return [DataD [] (mkName "PropTag")
         [PlainTV param]
         [ ForallC []
-            [EqualP (VarT param) (ConT $ propValueType ps)]
+            [AppT (AppT EqualityT (VarT param)) (ConT $ propValueType ps)]
             (NormalC (mkName $ propHaskellName ps) [])
         | ps <- propSpecs
         ] [''Typeable]]
