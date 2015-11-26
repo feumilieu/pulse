@@ -22,7 +22,7 @@ module Sound.Pulse.Monad.Internal
     ) where
 
 import Prelude hiding (catch)
-import Control.Applicative (Applicative(..))
+import Control.Applicative (Applicative(..), Alternative(..))
 import Control.Monad (MonadPlus(..))
 import Control.Monad.Trans.Class (MonadTrans(..))
 import Control.Monad.Trans.Reader (ReaderT)
@@ -38,6 +38,10 @@ newtype PulseT m n = PulseT { unPulseT :: ReaderT Context m n }
 instance Applicative m => Applicative (PulseT m) where
     pure = PulseT . pure
     (<*>) (PulseT code1) (PulseT code2) = PulseT $ code1 <*> code2
+
+instance Alternative m => Alternative (PulseT m) where
+    empty = PulseT empty
+    (<|>) (PulseT code1) (PulseT code2) = PulseT $ code1 <|> code2
 
 instance Monad m => Monad (PulseT m) where
     PulseT f >>= g = PulseT $ f >>= unPulseT . g
